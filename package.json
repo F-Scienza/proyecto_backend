@@ -1,0 +1,20 @@
+{
+  "name": "proyecto_final",
+  "version": "1.0.0",
+  "description": "primera entrega proyecto final backend curso coderhouse",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend",
+    "express",
+    "router"
+  ],
+  "author": "f-scienza",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2"
+  }
+}
