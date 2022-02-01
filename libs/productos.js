@@ -1,64 +1,62 @@
 const fs = require('fs');
-class Contenedor {
+class Product {
 	constructor(filename) {
 		this.id = 0;
 		this.file = filename;
-		this.productList = [];
+		this.list = [];
 	}
 
 	async init() {
-		console.log(`inicio el archivo`);
 		const data = await fs.readFileSync(this.file);
 		const dataProducts = JSON.parse(data);
 		for (const element of dataProducts) {
-			this.productList.push(element);
+			this.list.push(element)
+			this.id++
 		}
-		console.log('file loaded ');
-	}
-
-	async getAll() {
-		let allProducts = JSON.stringify(this.productList);
-		console.log('se ejecutó get all ');
-		return allProducts;
-	}
-
-	async save(object) {
-		this.id++;
-		object['id'] = this.id;
-		this.productList.push(object);
-		await this.write();
-		return this.id;
+		console.log('-----file loaded-----');
 	}
 
 	async write() {
-		let string = JSON.stringify(this.productList);
-		await fs.promises.writeFile(this.file, string);
+		await fs.promises.writeFile(this.file, JSON.stringify(this.list))
 	}
 
-	async deleteAll() {
-		this.productList = [];
-		await this.write();
+	async getAll() {
+		console.log('-----get all----');
+		let allProducts = JSON.stringify(this.list);
+		return allProducts;
 	}
 
-	async addProduct(obj) {
-		obj.id = ++this.id;
-		this.productList.push(obj);
-		return obj;
+	async getById(id) {
+		console.log('----get by id-----')
+		let result;
+		if (this.list !== []) {
+			result = this.list.find(x => x.id === id);
+			if (result === undefined) {
+				result = null;
+			}
+		} else {
+			result = 'No coincide ningun id';
+		}
+		return result;
 	}
 
-	async getById(searcheId) {
-		let searchedProduct = this.productList.find(el => el.id == searcheId);
-		return searchedProduct;
+	async save(object) {
+		console.log('-----save-----')
+		this.id++; //Aumento la propiedad que va guardando el ID más alto
+//		console.log('save id '+this.id)
+		object['id'] = this.id; //Agrego la propiedad id al objeto pasado como parámetro
+		this.list.push(object); //Agrego el objeto al contenido(array)
+//		console.log(this.list);
+		this.write(); //Agrego el objeto al archivo
+		return `El id del objeto añadido es ${this.id}.`; //Retorna el ID (lo solicita la consigna)
 	}
 
-	async deleteById(id) {
-		this.productList = this.productList.filter(element => element.id != id);
-	}
-
-	async update(id, obj) {
-		const index = this.productList.findIndex(objB => objB.id == id);
-		obj.id = this.productList[index] = obj;
+	async update(upId, obj) {
+		console.log('-----update-----')
+		const index = this.list.findIndex(el => el.id == upId);
+		obj.id = this.list[index].id;
+		this.list[index] = obj;
 		return obj;
 	}
 }
-module.exports = Contenedor;
+module.exports = Product;

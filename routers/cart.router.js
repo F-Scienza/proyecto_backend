@@ -1,6 +1,8 @@
 const express = require('express');
 const { Router } = express;
 const routerCart = Router();
+routerCart.use(express.json());
+routerCart.use(express.urlencoded({ extended: true }));
 
 routerCart.post('/', (req, res)=>{
     //  crea CARRITO y devuelve id

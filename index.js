@@ -2,9 +2,17 @@ const express = require("express");
 
 const app = express()
 
-const { Router } = express
-const router = Router()
+const cartRouter = require('./routers/cart.router')
 
-app.listen(8080, ()=>{
-    console.log("listen 8080")
+const productsRouter = require('./routers/products.router');
+
+
+app.use(express.static(__dirname + '/public'));
+app.use('/api/carrito', cartRouter)
+app.use('/api/products', productsRouter)
+app.set('views','./views')
+app.set('view engine', 'ejs');
+
+app.listen(3000, () => {
+	console.log('listen 3000');
 })
