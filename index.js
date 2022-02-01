@@ -6,7 +6,6 @@ const cartRouter = require('./routers/cart.router')
 
 const productsRouter = require('./routers/products.router');
 
-
 app.use(express.static(__dirname + '/public'));
 app.use('/api/carrito', cartRouter)
 app.use('/api/products', productsRouter)

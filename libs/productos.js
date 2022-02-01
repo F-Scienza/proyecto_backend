@@ -7,7 +7,8 @@ class Product {
 	}
 
 	async init() {
-		const data = await fs.readFileSync(this.file);
+		console.log('-----init-----')
+		const data = await fs.promises.readFile(this.file);
 		const dataProducts = JSON.parse(data);
 		for (const element of dataProducts) {
 			this.list.push(element)
@@ -17,6 +18,7 @@ class Product {
 	}
 
 	async write() {
+		console.log('-----write-----')
 		await fs.promises.writeFile(this.file, JSON.stringify(this.list))
 	}
 
@@ -43,10 +45,8 @@ class Product {
 	async save(object) {
 		console.log('-----save-----')
 		this.id++; //Aumento la propiedad que va guardando el ID más alto
-//		console.log('save id '+this.id)
 		object['id'] = this.id; //Agrego la propiedad id al objeto pasado como parámetro
 		this.list.push(object); //Agrego el objeto al contenido(array)
-//		console.log(this.list);
 		this.write(); //Agrego el objeto al archivo
 		return `El id del objeto añadido es ${this.id}.`; //Retorna el ID (lo solicita la consigna)
 	}
@@ -56,6 +56,7 @@ class Product {
 		const index = this.list.findIndex(el => el.id == upId);
 		obj.id = this.list[index].id;
 		this.list[index] = obj;
+		this.write()
 		return obj;
 	}
 }
