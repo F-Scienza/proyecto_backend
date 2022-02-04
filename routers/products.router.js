@@ -31,12 +31,21 @@ routerProd.put('/:id', (req, res) => {
 	//  actualiza un producto por id
 	let obj = req.body;
 	let id = Number(req.params.id);
-	let list = products.update(id, obj);
-	return res.json(products.list);
+	products.update(id, obj);
+	return res.json(products.list[id]);
 });
 
 routerProd.delete('/:id', (req, res)=>{
     //  borra producto por id
+	let id = Number(req.params.id)
+	console.log(id)
+	products.deleteById(id)
+	return res.json(products.list)
+})
+
+routerProd.delete('/', (req, res)=>{
+	products.deleteAll()
+	return res.json(products.list)
 })
 
 module.exports = routerProd;
