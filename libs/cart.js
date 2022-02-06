@@ -20,7 +20,7 @@ class Cart {
 			this.write()
 		}
 	}
-	async write() {
+	async write() { 
 		try {
 			const str = JSON.stringify(this.list);
 			await fs.promises.writeFile(this.file, str);
@@ -29,11 +29,24 @@ class Cart {
 		}
 	}
 	newCart(obj){
+		console.log('-----new cart-----')
 		this.countID++
 		obj['id']=this.countID
 		this.carts.push(obj)
 		this.write()
 		return console.log(`id carrito ${this.countID}`)
+	}
+	
+	deleteCart(id){
+		console.log('-----delete cart-----')
+		if(this.carts.length > 0){
+			console.log(JSON.stringify(this.carts) + ' antes de filtrar ');
+			this.carts = newList
+			this.write()
+			console.log(`-----cart ${id} deleted-----`);	
+		}else{
+			console.log('-----no carts-----')
+		}
 	}
 }
 

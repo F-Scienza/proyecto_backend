@@ -12,11 +12,15 @@ carts.init()
 routerCart.post('/', (req, res)=>{
     //  crea CARRITO y devuelve id
     carts.newCart(req.body)
-    let content = carts.list
+    let content = carts.carts
     return res.json(content)
 })
 routerCart.delete('/:id', (req, res)=>{
     //  vacia CARRITO y lo elimina
+    let id = Number(req.params.id)
+    carts.deleteCart(id)
+    let content = carts.carts
+    return res.json(content)
 })
 routerCart.get('/:id/products', (req, res)=>{
     //  lista de productos en el carrito
