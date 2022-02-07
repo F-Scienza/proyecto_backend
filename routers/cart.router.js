@@ -24,6 +24,9 @@ routerCart.delete('/:id', (req, res)=>{
 })
 routerCart.get('/:id/products', (req, res)=>{
     //  lista de productos en el carrito
+    let id = Number(req.params.id)
+    let cartsearch = carts.getCartProducts(id)
+    return res.json(cartsearch)
 })
 routerCart.post('/:id/products', (req, res)=>{
     //  agrega productos al carrito por id de producto

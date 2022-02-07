@@ -1,9 +1,6 @@
 const express = require("express");
-
 const app = express()
-
 const cartRouter = require('./routers/cart.router')
-
 const productsRouter = require('./routers/products.router');
 
 app.use(express.static(__dirname + '/public'));
