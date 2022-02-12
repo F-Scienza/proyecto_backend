@@ -30,6 +30,11 @@ routerCart.get('/:id/products', (req, res)=>{
 })
 routerCart.post('/:id/products', (req, res)=>{
     //  agrega productos al carrito por id de producto
+    let id = Number(req.params.id)
+    let product = req.body 
+    carts.addProduct(id, product)
+    let content = carts.carts
+    return res.json(content)
 })
 routerCart.delete('/:id/productos/:id_prod', (req, res)=>{
     //  elimina un producto del carrito

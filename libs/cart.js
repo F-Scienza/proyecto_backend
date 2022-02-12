@@ -4,13 +4,12 @@ class Cart {
 	constructor(fileName) {
 		this.file = fileName;
 		this.countID = 0;
-		this.carts = [];
+		this.carts = []
 	}
 	async init() {
 		console.log('-----carts init-----')
 		const data = await fs.promises.readFile(this.file);
-		const dataCarts = JSON.parse(data);
-		
+		const dataCarts = JSON.parse(data); 
 		for(const el of dataCarts){
 			this.carts.push(el)
 			this.countID++
@@ -45,6 +44,16 @@ class Cart {
 		console.log('-----search cart-----')
 		let selectedCart = this.carts.find(el => el.id == id)
 		return selectedCart
+	}
+	async addProduct(id, product){
+		const index = this.carts.findIndex(objT => objT.id == id);
+		if (this.carts[index]) {
+			this.carts[index].products.push(product);
+			this.write();
+		} else {
+			console.log('no existe carrito con ese id');
+		}
+		return this.carts
 	}
 }
 module.exports = Cart;
