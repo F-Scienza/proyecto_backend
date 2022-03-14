@@ -11,7 +11,11 @@ products.init()
 
 routerProd.get('/', (req, res) => {
 	// 	Todos los productos
-	return res.json(products.list)
+	let productsList = products.list
+
+	return res.render('pages/products', {
+		list: productsList
+	})
 });
 routerProd.get('/:id', async (req, res) => {
 	//  listar todos los productos disponibles o un producto por id

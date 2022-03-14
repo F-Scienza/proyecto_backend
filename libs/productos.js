@@ -46,6 +46,7 @@ class Product {
 		console.log('-----product save-----')
 		this.id++; //Aumento la propiedad que va guardando el ID más alto
 		object['id'] = this.id; //Agrego la propiedad id al objeto pasado como parámetro
+		object.timestamp = Date.now() // timestamp
 		this.list.push(object); //Agrego el objeto al contenido(array)
 		this.write(); //Agrego el objeto al archivo
 		return `El id del objeto añadido es ${this.id}.`; //Retorna el ID (lo solicita la consigna)

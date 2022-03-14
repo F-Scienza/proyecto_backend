@@ -1,0 +1,24 @@
+<%- include("../partials/head.ejs", {titlePath: "form"}) %>
+<div class="form-container">
+	<h2>Crear nuevo producto</h2>
+	<form action="/" method="post">
+		<label for="title" class="form-label">
+			<span class="form-label-span"> Título </span>
+			<input type="text" class="form-control" name="title" />
+		</label>
+		<label for="price" class="form-label">
+			<span class="form-label-span"> Descripción </span>
+			<input type="text" class="form-control" name="description" />
+		</label>
+		<label for="price" class="form-label">
+			<span class="form-label-span"> Precio </span>
+			<input type="number" class="form-control" name="price" />
+		</label>
+		<label for="thumbnail" class="form-label">
+			<span class="form-label-span"> Link foto </span>
+			<input type="url" class="form-control" name="thumbnail" />
+		</label>
+		<button type="submit" class="form-btn">Cargar producto</button>
+	</form>
+</div>
+<br />
